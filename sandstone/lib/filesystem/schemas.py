@@ -93,15 +93,15 @@ class VolumeObject(BaseObject):
         },
         'size': {
             'type': 'string',
-            'regex': '^([\d]+(.[\d]+)?[bKMGT])$'
+            'regex': '^([\d]+(.[\d]+)?[bKMGTP])$'
         },
         'used': {
             'type': 'string',
-            'regex': '^(([\d]+(.[\d]+)?[bKMGT])|0)$'
+            'regex': '^(([\d]+(.[\d]+)?[bKMGTP])|0)$'
         },
         'available': {
             'type': 'string',
-            'regex': '^([\d]+(.[\d]+)?[bKMGT])$'
+            'regex': '^([\d]+(.[\d]+)?[bKMGTP])$'
         },
         'used_pct': {
             'type': 'number',
