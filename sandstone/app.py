@@ -47,6 +47,7 @@ class SandstoneApplication(tornado.web.Application):
             cookie_secret = settings.COOKIE_SECRET,
             xsrf_cookies=True,
             ui_methods=ui_methods,
+            cookie_name=kwargs['cookie_name']
             )
 
         tornado.web.Application.__init__(self, handlers, **app_settings)
@@ -90,10 +91,11 @@ class SandstoneApplication(tornado.web.Application):
 def main(**kwargs):
     port = kwargs.get('port', '8888')
     prefix = kwargs.get('prefix', None)
+    cookie_name = kwargs.get('cookie_name',None)
 
     if prefix: settings.URL_PREFIX = prefix
 
-    application = SandstoneApplication(debug=settings.DEBUG)
+    application = SandstoneApplication(debug=settings.DEBUG, cookie_name=cookie_name)
     if settings.USE_SSL:
         ssl_server = tornado.httpserver.HTTPServer(application, ssl_options={
             "certfile": settings.SSL_CERT,
