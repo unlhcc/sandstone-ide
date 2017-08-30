@@ -93,17 +93,34 @@ class VolumeObject(BaseObject):
         },
         'size': {
             'type': 'string',
-            'regex': '^([\d]+(.[\d]+)?[bKMGTP])$'
+            'regex': '^(\d*\.?\d+)([\s]*?(?=[KMGTP])([KMGTP])(?:i?B)?|B?)$'
         },
         'used': {
             'type': 'string',
-            'regex': '^(([\d]+(.[\d]+)?[bKMGTP])|0)$'
+            'regex': '^(\d*\.?\d+)([\s]*?(?=[KMGTP])([KMGTP])(?:i?B)?|B?)$'
         },
         'available': {
             'type': 'string',
-            'regex': '^([\d]+(.[\d]+)?[bKMGTP])$'
+            'regex': '^(\d*\.?\d+)([\s]*?(?=[KMGTP])([KMGTP])(?:i?B)?|B?)$'
         },
         'used_pct': {
+            'type': 'number',
+            'min': 0,
+            'max': 100
+        },
+       'group_size': {
+            'type': 'string',
+            'regex': '^(\d*\.?\d+)([\s]*?(?=[KMGTP])([KMGTP])(?:i?B)?|B?)$'
+        },
+        'group_used': {
+            'type': 'string',
+            'regex': '^(\d*\.?\d+)([\s]*?(?=[KMGTP])([KMGTP])(?:i?B)?|B?)$'
+        },
+        'group_available': {
+            'type': 'string',
+            'regex': '^(\d*\.?\d+)([\s]*?(?=[KMGTP])([KMGTP])(?:i?B)?|B?)$'
+        },
+        'group_used_pct': {
             'type': 'number',
             'min': 0,
             'max': 100
