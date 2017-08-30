@@ -10,6 +10,7 @@ import subprocess
 from sandstone.lib.filesystem.schemas import FilesystemObject
 from sandstone.lib.filesystem.schemas import VolumeObject
 from sandstone.lib.filesystem.schemas import FileObject
+from sandstone.lib.filesystem.hccquota import HccQuota
 
 
 
@@ -48,6 +49,12 @@ class PosixFS:
             })
             vol = VolumeObject(**vd)
             volumes.append(vol)
+
+        # add HCC volumes
+        hcc_quota = HccQuota()
+        hcc_volumes = hcc_quota.get_hcc_volumes()
+        volumes += hcc_volumes
+
         details.update({
             'volumes': volumes
         })

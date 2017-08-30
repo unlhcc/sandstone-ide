@@ -23,6 +23,8 @@ setup(
         'cerberus',
         'PyDispatcher',
         'python-magic',
+        'bitmath',
+        'hcc-du'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
