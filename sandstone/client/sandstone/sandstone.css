@@ -1,6 +1,6 @@
 html, body {
   height: 100%;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+//  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 body {
   padding-top: 50px;
@@ -27,13 +27,13 @@ body {
 /*
  * Sandstone theme modifications
  */
-.navbar-default .navbar-brand {
+/*.navbar-default .navbar-brand {
   color: #93c54b;
 }
 .navbar-default ul.nav > li.active > a {
   color: #93c54b;
 }
-
+*/
 .navbar-icon {
   margin: 10px 0 10px 10px;
 }
