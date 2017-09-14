@@ -63,3 +63,13 @@ div[uib-modal-backdrop].modal-backdrop {
   right: 20vw;
   z-index: 3000;
 }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 50px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
