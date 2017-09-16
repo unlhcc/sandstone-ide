@@ -1,4 +1,5 @@
 import pwd
+import grp
 import os
 import re
 import bitmath
@@ -28,6 +29,9 @@ class HccQuota:
 
         volume = {}
         volume['type'] = 'volume'
+        volume['username'] = pwe.pw_name
+        volume['groupname'] = grp.getgrgid(pwe.pw_gid).gr_name
+
         # get user and primary group quota info
         user_quota_info = quota_stats[0]._asdict()
         primary_group_quota_info = quota_stats[1]._asdict()

@@ -11,7 +11,7 @@ angular.module('sandstone.filesystemservice', [])
   var _fsFileUrl = '/a/filesystem/files/';
 
   // FS object constructors
-  self.Volume = function(filepath,size,used,available,usedPercent,group_size,group_used,group_available,groupusedPercent) {
+  self.Volume = function(filepath,size,used,available,usedPercent,group_size,group_used,group_available,groupusedPercent,username,groupname) {
     var filepathRegex = /^(\/(?:[^\/]+\/)*)+([^\/]+)[\/]?$/;
     var filepathMatches = filepath.match(filepathRegex);
 
@@ -32,6 +32,8 @@ angular.module('sandstone.filesystemservice', [])
     this.group_used = group_used;
     this.group_available = group_available;
     this.groupusedPercent = groupusedPercent;
+    this.username = username;
+    this.groupname = groupname;
   };
 
   self.Filesystem = function(availableGroups,volumes) {
@@ -50,6 +52,8 @@ angular.module('sandstone.filesystemservice', [])
         v.group_used,
         v.group_available,
         v.group_used_pct,
+	v.username,
+	v.groupname,
       );
       this.volumes.push(volume);
     }

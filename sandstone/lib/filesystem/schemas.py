@@ -124,7 +124,13 @@ class VolumeObject(BaseObject):
             'type': 'number',
             'min': 0,
             'max': 100
-        }
+        },
+        'username': {
+            'type': 'string'
+        },
+        'groupname': {
+            'type': 'string'
+        },
     })
 
 class FileObject(BaseObject):
