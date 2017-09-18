@@ -1,5 +1,6 @@
 from sandstone import settings
-
+import pwd
+import os
 
 
 def get_app_descriptions(*args,**kwargs):
@@ -21,3 +22,9 @@ def get_ng_module_spec(*args,**kwargs):
 def get_url_prefix(*args,**kwargs):
     url_prefix = settings.URL_PREFIX
     return url_prefix
+
+def get_full_name(*args,**kwargs):
+    full_name = pwd.getpwuid(os.getuid()).pw_gecos
+    if not full_name:
+         full_name = "HCC user"
+    return full_name
