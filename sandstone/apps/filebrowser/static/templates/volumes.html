@@ -16,7 +16,7 @@
   <span>My Spaces</span>
   <ul class="list-group">
     <li class="list-group-item" ng-class="{'list-group-item-success': ctrl.selection.volume.filepath===volume.filepath}" ng-repeat="volume in ctrl.filesystem.volumes track by $index" ng-click="ctrl.changeVolume(volume)">
-      <span class="badge">{{volume.usedPercent}}% full</span>
+      <span class="badge">{{volume.percent_full}}% full</span>
       {{volume.filepath}}
     </li>
   </ul>

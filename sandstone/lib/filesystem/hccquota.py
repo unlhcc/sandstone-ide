@@ -44,6 +44,8 @@ class HccQuota:
             # add the primary group stats for /home
             group_stats = self._add_group_stats(self._quota_to_stats(primary_group_quota_info))
             volume.update(group_stats)
+            # for /home, use the user quota for % full
+            volume['percent_full'] = volume['used_pct']
             return volume
 
         elif path == 'work':
@@ -54,6 +56,8 @@ class HccQuota:
             volume.update(self._quota_to_stats(user_quota_info))
             group_stats = self._add_group_stats(self._quota_to_stats(primary_group_quota_info))
             volume.update(group_stats)
+            # for /work, use the group quota for % full
+            volume['percent_full'] = volume['group_used_pct']
             return volume
 
 

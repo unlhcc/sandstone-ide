@@ -131,6 +131,11 @@ class VolumeObject(BaseObject):
         'groupname': {
             'type': 'string'
         },
+        'percent_full': {
+            'type': 'number',
+            'min': 0,
+            'max': 100
+        },
     })
 
 class FileObject(BaseObject):
