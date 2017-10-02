@@ -10,6 +10,7 @@ import subprocess
 from sandstone.lib.filesystem.schemas import FilesystemObject
 from sandstone.lib.filesystem.schemas import VolumeObject
 from sandstone.lib.filesystem.schemas import FileObject
+from sandstone.lib.filesystem.atticquota import AtticQuota
 
 
 
@@ -48,6 +49,11 @@ class PosixFS:
             })
             vol = VolumeObject(**vd)
             volumes.append(vol)
+
+        attic_quota = AtticQuota()
+        (attic_volume, expire_message) = attic_quota.get_attic_volume()
+        volumes += attic_volume
+
         details.update({
             'volumes': volumes
         })
