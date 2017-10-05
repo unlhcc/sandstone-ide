@@ -51,8 +51,12 @@ class PosixFS:
             volumes.append(vol)
 
         attic_quota = AtticQuota()
-        (attic_volume, expire_message) = attic_quota.get_attic_volume()
+        (attic_volume, attic_alerts) = attic_quota.get_attic_volume()
         volumes += attic_volume
+
+        details.update({
+            'alerts' :  attic_alerts
+        })
 
         details.update({
             'volumes': volumes

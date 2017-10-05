@@ -52,6 +52,22 @@ class AtticQuota:
 
         return (stats)
 
+    def _add_alerts(self, volume_stats):
+        """
+        Add any needed alerts based on usage or expiration date.
+        """
+        alerts = []
+
+        if (self.WARNING_PERCENT <= volume_stats['used_pct'] < 100):
+            alerts.append(self.ALERTS['near_full'].format(volume_stats['used_pct']))
+        elif (volume_stats['used_pct'] == 100):
+            alerts.append(self.ALERTS['full'])
+
+        if (dt.datetime.strptime(volume_stats['expire_datetime'],'%Y-%m-%d %X') - dt.datetime.now() <= self.EXPIRE_WINDOW):
+            alerts.append(self.ALERTS['near_expire'])
+
+        return alerts
+
     def get_attic_volume(self):
         """
         Get Attic usage information.
@@ -75,12 +91,14 @@ class AtticQuota:
             # File can't be opened.  Either the user never had an allocation,
             # or it's been > 2 weeks since it expired.  Return an empty list.
             attic_volume = []
-            alert = "No valid allocation"
-            return (attic_volume, alert)
+            alerts = []
+            alerts.append(self.ALERTS['no_allocation'])
+            return (attic_volume, alerts)
 
         (usage_stats) = self._parse_usage_file(usage_file_h)
         volume_stats.update(usage_stats)
+        alerts = self._add_alerts(volume_stats)
+
         attic_volume = []
         attic_volume.append(VolumeObject(**volume_stats))
-        alert = None
-        return (attic_volume, alert)
+        return (attic_volume, alerts)
