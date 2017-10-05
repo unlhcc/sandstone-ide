@@ -12,6 +12,16 @@ class AtticQuota:
 
     def __init__(self):
         self.usage_file = 'disk_usage.txt'
+        # Percent full to show quota warning at.
+        self.WARNING_PERCENT = 95
+        # Time period prior to expiration to begin showing warning.
+        self.EXPIRE_WINDOW = dt.timedelta(days=14)
+        self.ALERTS = {
+        'near_full' : """Your Attic quota is {0}% full!  Consider removing unneeded files to reduce usage.  Need more space?  Contact hcc-support@unl.edu to purchase additional storage.""",
+        'full' :  """Your Attic space is full!  You won't be able to upload any more files until you reduce your usage.  Need more space?  Contact hcc-support@unl.edu to purchase additional storage.""",
+        'near_expire' :  """Your Attic space will expire soon!  Contact hcc-support@unl.edu to renew and retain access to your data.""",
+        'no_allocation' : """Oops!  It looks like you haven't purchased Attic space, or it has been more than two weeks since your allocation expired.  See hcc.unl.edu/attic for details on reserving an allocation or contact hcc-support@unl.edu to renew."""
+    }
 
     def _parse_usage_file(self, usage_file_handle):
         """
