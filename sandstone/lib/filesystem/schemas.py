@@ -124,7 +124,10 @@ class VolumeObject(BaseObject):
             'type': 'number',
             'min': 0,
             'max': 100
-        }
+        },
+        'expire_datetime': {
+            'type': 'string'
+        },
     })
 
 class FileObject(BaseObject):

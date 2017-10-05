@@ -36,7 +36,8 @@ class AtticQuota:
              'available' : available.best_prefix(system=bitmath.SI).format("{value:.0f} {unit}") if available.value else '0',
              'used_pct' : int('{:.0f}'.format(used_pct)),
              'size' : size.best_prefix(system=bitmath.SI).format("{value:.0f} {unit}"),
-             'expire_message' : friendly_expire_message
+             'expire_message' : friendly_expire_message,
+             'expire_datetime' : expire_datetime.strftime('%Y-%m-%d %X'),
                 }
 
         return (stats)
