@@ -62,6 +62,13 @@ angular.module('sandstone.filebrowser')
   var fsDetails = FilesystemService.getFilesystemDetails();
   fsDetails.then(function(filesystemDetails) {
     filesystem = filesystemDetails;
+    for (var i=0;i<filesystem.alerts.length;i++) {
+      AlertService.addAlert({
+      type: 'warning',
+      message: filesystem.alerts[i],
+      close: true
+    })
+    }
   },
   function(data) {
     AlertService.addAlert({
@@ -113,5 +120,4 @@ angular.module('sandstone.filebrowser')
       self.setSelectedFile();
     }
   });
-
 }]);

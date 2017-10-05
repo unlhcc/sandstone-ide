@@ -31,9 +31,10 @@ angular.module('sandstone.filesystemservice', [])
     this.expireMessage = expireMessage;
   };
 
-  self.Filesystem = function(availableGroups,volumes) {
+  self.Filesystem = function(availableGroups,volumes,alerts) {
     this.type = 'filesystem';
     this.groups = availableGroups;
+    this.alerts = alerts;
     this.volumes = [];
     for (var i=0;i<volumes.length;i++) {
       var v = volumes[i];
@@ -156,7 +157,8 @@ angular.module('sandstone.filesystemservice', [])
     req.success(function(data) {
       var fsDetails = new self.Filesystem(
         data.groups,
-        data.volumes
+        data.volumes,
+        data.alerts
       );
       deferred.resolve(fsDetails);
     });
