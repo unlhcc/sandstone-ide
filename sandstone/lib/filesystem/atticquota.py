@@ -29,6 +29,10 @@ class AtticQuota:
         'no_allocation' : { 'message': """Oops!  It looks like you haven't purchased Attic space, or it has been more than two weeks since your allocation expired.  See hcc.unl.edu/attic for details on reserving an allocation or contact hcc-support@unl.edu to renew.""",
             'type': 'danger',
             'close': False },
+        'expire_read_only': {
+            'message':  """Your Attic allocation expired {0}!  You can still view your existing files, but won't be able to upload new ones.  Contact hcc-support@unl.edu to renew your allocation and regain full access.""",
+            'type': 'warning',
+            'close': True}
     }
 
     def _parse_usage_file(self, usage_file_handle):
@@ -75,6 +79,11 @@ class AtticQuota:
         if ((dt.datetime.strptime(volume_stats['expire_datetime'],'%Y-%m-%d %X') - dt.datetime.now() <= self.EXPIRE_WINDOW) and \
                 dt.datetime.now() <= dt.datetime.strptime(volume_stats['expire_datetime'],'%Y-%m-%d %X')):
             alerts.append(self.ALERTS['near_expire'])
+        elif (dt.datetime.now() >= dt.datetime.strptime(volume_stats['expire_datetime'],'%Y-%m-%d %X')):
+            alerts.append({'message': \
+            self.ALERTS['expire_read_only']['message'].format(\
+            dt.datetime.strftime(dt.datetime.strptime(volume_stats['expire_datetime'],'%Y-%m-%d %X'),"%B %d, %Y at %I:%M:%S %p")), \
+            'type': self.ALERTS['expire_read_only']['type'], 'close': self.ALERTS['expire_read_only']['close'] })
 
         return alerts
 
