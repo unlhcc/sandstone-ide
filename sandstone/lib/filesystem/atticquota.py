@@ -72,7 +72,8 @@ class AtticQuota:
         elif (volume_stats['used_pct'] == 100):
             alerts.append(self.ALERTS['full'])
 
-        if (dt.datetime.strptime(volume_stats['expire_datetime'],'%Y-%m-%d %X') - dt.datetime.now() <= self.EXPIRE_WINDOW):
+        if ((dt.datetime.strptime(volume_stats['expire_datetime'],'%Y-%m-%d %X') - dt.datetime.now() <= self.EXPIRE_WINDOW) and \
+                dt.datetime.now() <= dt.datetime.strptime(volume_stats['expire_datetime'],'%Y-%m-%d %X')):
             alerts.append(self.ALERTS['near_expire'])
 
         return alerts
