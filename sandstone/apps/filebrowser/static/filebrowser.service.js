@@ -64,9 +64,9 @@ angular.module('sandstone.filebrowser')
     filesystem = filesystemDetails;
     for (var i=0;i<filesystem.alerts.length;i++) {
       AlertService.addAlert({
-      type: 'warning',
-      message: filesystem.alerts[i],
-      close: true
+      type: filesystem.alerts[i]['type'],
+      message: filesystem.alerts[i]['message'],
+      close: filesystem.alerts[i]['close']
     })
     }
   },
