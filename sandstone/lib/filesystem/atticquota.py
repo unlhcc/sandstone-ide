@@ -118,6 +118,10 @@ class AtticQuota:
         volume_stats.update(usage_stats)
         alerts = self._add_alerts(volume_stats)
 
+        # Validation in schemas.py only accepts uppercase SI units
+        for field in ['used', 'available', 'size']:
+            volume_stats[field] = volume_stats[field].upper()
+
         attic_volume = []
         attic_volume.append(VolumeObject(**volume_stats))
         return (attic_volume, alerts)
